@@ -29,13 +29,15 @@ client.on('ready', () => {
     commandsDir: path.join(__dirname, 'commands'),
     botOwners: ['95377567707566080'],
     testServers: ['289669662612914176'],
-    mongoUri: process.env.MONGO_URI,
+    //mongoUri: process.env.DATABASE_URL,
     cooldownConfig: {
       errorMessage: 'Please wait {TIME} before doing that again.',
       botOwnersBypass: true,
       dbRequired: 300,
     },
   });
+
+  console.log('The bot is ready');
 });
 
 client.login(process.env.TOKEN);
