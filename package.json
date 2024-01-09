@@ -1,0 +1,21 @@
+{
+  "name": "dabloons-bot",
+  "version": "1.0.0",
+  "description": "a discord bot",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1",
+    "wokcommands": "^2.1.9"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
