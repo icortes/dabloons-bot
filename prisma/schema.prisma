@@ -11,5 +11,5 @@ model users {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @db.Date
   currency  Int
-  user_id   String
+  user_id   String   @unique
 }

@@ -4,13 +4,15 @@
   "description": "a discord bot",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/index.js",
+    "postinstall": "tsc",
     "test-db": "node prisma/test_connection.mjs",
     "dev": "nodemon index.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^5.7.1",
+    "@prisma/client": "^5.9.1",
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1",
     "wokcommands": "^2.1.9"
