@@ -61,6 +61,12 @@ jobs:
           SSH_USERNAME: ${{ secrets.PI_USERNAME }}
           SSH_PORT: ${{ secrets.PI_PORT }}
           SSH_SCRIPT: "npm start"  # Adjust this if needed
+
+      - name: Set up SSH agent
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      
       - name: Copy artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -78,7 +84,6 @@ jobs:
         with: 
           host: ${{ secrets.PI_HOST }}
           username: ${{ secrets.PI_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PI_PORT }}
           script: |
             npm start
