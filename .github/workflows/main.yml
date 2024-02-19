@@ -62,6 +62,9 @@ jobs:
           SSH_PORT: ${{ secrets.PI_PORT }}
           SSH_SCRIPT: "npm start"  # Adjust this if needed
 
+      - name: Debug SSH private key
+        run: echo "${{ secrets.SSH_PRIVATE_KEY }}"
+
       - name: Set up SSH agent
         uses: webfactory/ssh-agent@v0.5.3
         with:
