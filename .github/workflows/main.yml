@@ -63,30 +63,23 @@ jobs:
           SSH_SCRIPT: "npm start"  # Adjust this if needed
 
       - name: Debug SSH private key
-        run: echo "${{ secrets.SSH_PRIVATE_KEY }}"
-
-      - name: Set up SSH agent
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: echo "${{ secrets.PI_SSH_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
       
       - name: Copy artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v2
         with:
           name: dist
           path: ./dist
       
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v2
         with:
           name: dist
           path: ./dist
-      
-      - name: Deploy to miniserver
-        uses: appleboy/ssh-action@master
-        with: 
-          host: ${{ secrets.PI_HOST }}
-          username: ${{ secrets.PI_USERNAME }}
-          port: ${{ secrets.PI_PORT }}
-          script: |
-            npm start
+
+      - name: Install SSH key
+        run: echo "${{ secrets.PI_SSH_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+
+      - name: SSH Command
+        run: |
+          ssh -i ~/.ssh/id_rsa -p ${{ secrets.PI_PORT }} ${{ secrets.PI_USERNAME }}@${{ secrets.PI_HOST }} "${SSH_SCRIPT}"
