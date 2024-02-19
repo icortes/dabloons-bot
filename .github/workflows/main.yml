@@ -24,7 +24,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.x, 21.x]
+        node-version: [21.x]
 
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -67,4 +67,4 @@ jobs:
           key: ${{ secrets.PI_SSH_KEY }}
           port: ${{ secrets.PI_PORT }}
           script: |
-            
+            npm start
