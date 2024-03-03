@@ -60,7 +60,7 @@ jobs:
           SSH_HOST: ${{ secrets.PI_HOST }}
           SSH_USERNAME: ${{ secrets.PI_USERNAME }}
           SSH_PORT: ${{ secrets.PI_PORT }}
-          SSH_SCRIPT: 'cd ~/actions-runner/_work/isabot/isabot && npx prisma generate && npm start' # Adjust this if needed
+          SSH_SCRIPT: 'cd ~/actions-runner/_work/isabot/isabot && npx prisma generate && nohup npm start &' # Adjust this if needed
 
       - name: Copy artifacts
         uses: actions/upload-artifact@v2
