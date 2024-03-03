@@ -37,6 +37,8 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm ci
+      - name: Install PM2
+        run: npm install pm2 -g
       - name: Build Typescript
         run: npm run build
       - name: Generate .env file
@@ -85,4 +87,4 @@ jobs:
             echo "Executing SSH script"
             cd ~/actions-runner/_work/isabot/isabot
             npx prisma generate
-            npm start
+            pm2 start npm --name 'isabot' -- start
