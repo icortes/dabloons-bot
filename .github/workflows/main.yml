@@ -50,6 +50,8 @@ jobs:
           echo "Username: ${SSH_USERNAME}"
           echo "Port: ${SSH_PORT}"
           echo "Running SSH command..."
+          ls -la ~/actions-runner/_work/isabot/isabot  # Debugging: List contents of the directory
+          pwd  # Debugging: Print current working directory
         env:
           SSH_HOST: ${{ secrets.PI_HOST }}
           SSH_USERNAME: ${{ secrets.PI_USERNAME }}
