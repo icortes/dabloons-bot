@@ -12,14 +12,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "latest",
+    "@prisma/client": "^5.10.2",
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1",
     "wokcommands": "^2.1.9"
   },
   "devDependencies": {
     "nodemon": "^3.0.2",
-    "prisma": "latest",
+    "prisma": "^5.10.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
