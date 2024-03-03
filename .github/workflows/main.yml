@@ -86,5 +86,5 @@ jobs:
             echo "Executing SSH script"
             cd ~/actions-runner/_work/isabot/isabot
             npx prisma generate
-            npx pm2 stop isabot || true
+            npx pm2 delete isabot || true
             npx pm2 start npm --name 'isabot' -- start
