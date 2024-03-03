@@ -54,7 +54,7 @@ jobs:
           SSH_HOST: ${{ secrets.PI_HOST }}
           SSH_USERNAME: ${{ secrets.PI_USERNAME }}
           SSH_PORT: ${{ secrets.PI_PORT }}
-          SSH_SCRIPT: 'npx prisma generate && npm start' # Adjust this if needed
+          SSH_SCRIPT: 'ls -a' # Adjust this if needed
 
       - name: Copy artifacts
         uses: actions/upload-artifact@v2
