@@ -77,4 +77,8 @@ jobs:
           username: ${{ secrets.PI_USERNAME }}
           key: ${{ secrets.PI_SSH_KEY }}
           port: ${{ secrets.PI_PORT }}
-          script: '${SSH_SCRIPT}'
+          script: |
+            echo "Executing SSH script"
+            cd ~/actions-runner/_work/isabot/isabot
+            npx prisma generate
+            npm start
