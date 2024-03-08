@@ -10,7 +10,7 @@ export default {
 
   // Invoked when a user runs the ping command
   callback: async ({ member }) => {
-    let user = await prisma.users.findUnique({
+    let user = await prisma.user.findUnique({
       where: {
         user_id: member?.id,
       },
