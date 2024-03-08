@@ -11,6 +11,7 @@ export default {
 
   // Invoked when a user runs the ping command
   callback: async ({ member }: { member: GuildMember }) => {
+    let userTotalDabloons: number;
     let user = await prisma.user.findUnique({
       where: {
         user_id: member.id,
@@ -27,6 +28,7 @@ export default {
         },
       });
 
+      userTotalDabloons = user.currency;
       console.info(`[Prisma]: ${member} created: ${user}`);
     } else {
       let updatedUser = await prisma.user.update({
@@ -38,11 +40,22 @@ export default {
         },
       });
 
+      userTotalDabloons = updatedUser.currency;
       console.info(`[Prisma]: ${member} updated: ${updatedUser}`);
     }
 
     return {
-      content: `${randomNumber / 20}`,
+      content: `${randomNumber} / 20. Total: ${userTotalDabloons}!\n${getCoinEmojis(
+        randomNumber
+      )}`,
     };
   },
 } as CommandObject;
+
+function getCoinEmojis(coins: number): string {
+  let coinString: string = '';
+  for (let i: number = 0; i < coins; i++) {
+    coinString += '🪙';
+  }
+  return coinString;
+}
