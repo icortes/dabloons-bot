@@ -1,6 +1,6 @@
 {
   "name": "dabloons-bot",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "a discord bot",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,7 @@
     "@prisma/client": "^5.10.2",
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1",
+    "pure-rand": "^6.0.4",
     "wokcommands": "^2.1.9"
   },
   "devDependencies": {

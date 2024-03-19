@@ -1,4 +1,4 @@
-import { Client, Events, IntentsBitField, Partials } from 'discord.js';
+import { ActivityType, Client, Events, IntentsBitField, Partials } from 'discord.js';
 import WOK from 'wokcommands';
 import path from 'path';
 require('dotenv/config');
@@ -21,8 +21,9 @@ client.once(Events.ClientReady, (readyClient) => {
     status: 'online',
     activities: [
       {
-        name: 'with your heart ❤️',
-        type: 0,
+        name: 'Valorante 🔫',
+        type: ActivityType.Playing,
+        state: '*★,°*:.☆(￣▽￣) / $:*.°★* 。',
       },
     ],
   });
