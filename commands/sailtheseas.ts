@@ -29,7 +29,7 @@ export default {
       });
 
       userTotalDabloons = user.currency;
-      console.info(`[Prisma]: ${member} created: ${user}`);
+      console.info(`[Prisma]: ${member.displayName} created: ${JSON.stringify(user)}`);
     } else {
       let updatedUser = await prisma.user.update({
         where: {
@@ -41,7 +41,9 @@ export default {
       });
 
       userTotalDabloons = updatedUser.currency;
-      console.info(`[Prisma]: ${member} updated: ${updatedUser}`);
+      console.info(
+        `[Prisma]: ${member.displayName} updated: ${JSON.stringify(updatedUser)}`
+      );
     }
 
     return {
