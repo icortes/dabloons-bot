@@ -1,8 +1,13 @@
 import { CommandObject, CommandType } from 'wokcommands';
 import prisma from '../prisma/prisma';
 import { GuildMember } from 'discord.js';
+import { getCoinEmojis, getFileNameWithoutExtension } from '../helpers/functions';
 
 export default {
+  // init command is ran when the bot is first started
+  init: () => {
+    console.info(`[COMMAND] /${getFileNameWithoutExtension(__filename)} loaded!`);
+  },
   // Required for slash commands
   description: 'Get your daily dabloons! 🪙',
 
@@ -24,11 +29,11 @@ export default {
       user = await prisma.user.create({
         data: {
           user_id: member.id,
-          currency: randomNumber,
+          moneyAmount: randomNumber,
         },
       });
 
-      userTotalDabloons = user.currency;
+      userTotalDabloons = user.moneyAmount;
       console.info(`[Prisma]: ${member.displayName} created: ${JSON.stringify(user)}`);
     } else {
       let updatedUser = await prisma.user.update({
@@ -36,11 +41,11 @@ export default {
           user_id: member.id,
         },
         data: {
-          currency: randomNumber + user.currency,
+          moneyAmount: randomNumber + user.moneyAmount,
         },
       });
 
-      userTotalDabloons = updatedUser.currency;
+      userTotalDabloons = updatedUser.moneyAmount;
       console.info(
         `[Prisma]: ${member.displayName} updated: ${JSON.stringify(updatedUser)}`
       );
@@ -53,11 +58,3 @@ export default {
     };
   },
 } as CommandObject;
-
-function getCoinEmojis(coins: number): string {
-  let coinString: string = '';
-  for (let i: number = 0; i < coins; i++) {
-    coinString += '🪙';
-  }
-  return coinString;
-}

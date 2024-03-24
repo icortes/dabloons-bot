@@ -1,6 +1,11 @@
 import { CommandObject, CommandType } from 'wokcommands';
+import { getFileNameWithoutExtension } from '../helpers/functions';
 
 export default {
+  // init command is ran when the bot is first started
+  init: () => {
+    console.info(`[COMMAND] /${getFileNameWithoutExtension(__filename)} loaded!`);
+  },
   // Required for slash commands
   description: 'Ping pong command',
 
