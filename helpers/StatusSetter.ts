@@ -69,3 +69,5 @@ export class StatusSetter {
     this.state = state;
   }
 }
+
+//TODO: setting status bug fix with 2nd argument

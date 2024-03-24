@@ -12,6 +12,7 @@ model User {
   createdAt   DateTime @default(now())
   moneyAmount Int      @map("currency")
   user_id     String   @unique
+  name        String?
 
   @@map("users")
 }
