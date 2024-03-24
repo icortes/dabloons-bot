@@ -5,8 +5,13 @@ import { CoinflipHistory } from '../helpers/CoinflipHistory';
 import { Coinface } from '../helpers/enums';
 import { ArgsTypes } from '../helpers/types';
 import prisma from '../prisma/prisma';
+import { getFileNameWithoutExtension } from '../helpers/functions';
 
 export default {
+  // init command is ran when the bot is first started
+  init: () => {
+    console.info(`[COMMAND] /${getFileNameWithoutExtension(__filename)} loaded!`);
+  },
   // Required for slash commands
   description: 'Gamble your points away! 🎰',
 
@@ -91,7 +96,7 @@ export default {
           user_id: member?.id,
         },
         select: {
-          currency: true,
+          moneyAmount: true,
         },
       });
 
@@ -105,7 +110,7 @@ export default {
       }
 
       // check that the bet amount * numberOfBets is less than user dabloon amount
-      if (user.currency < betAmount * numberOfBets) {
+      if (user.moneyAmount < betAmount * numberOfBets) {
         return {
           content:
             'Bet amount exceeds your dabloon amount! Try a smaller bet! <:CAUGHT:1192270643534766191>',
@@ -132,24 +137,24 @@ export default {
         numberOfBets--;
       }
 
-      const updatedUser = await prisma.user.update({
+      const updatedUser: { moneyAmount: number } = await prisma.user.update({
         where: {
           user_id: member?.id,
         },
         data: {
-          currency: user.currency + jackpot,
+          moneyAmount: user.moneyAmount + jackpot,
         },
         select: {
-          currency: true,
+          moneyAmount: true,
         },
       });
 
       // send message with jackpot and updated dabloons
       return {
-        content: `${member?.displayName} chose ${coinface}. ${
+        content: `${member} chose ${coinface}. ${
           jackpot > 0
-            ? `Won ${jackpot} dabloons❗ total dabloons: ${updatedUser.currency} <a:catJAM:738060105576218750>`
-            : `Lost ${jackpot} dabloons❗ total dabloons: ${updatedUser.currency} <a:BLUBBERS:855166052492771378>`
+            ? `Won ${jackpot} dabloons❗ total dabloons: ${updatedUser.moneyAmount} <a:catJAM:738060105576218750>`
+            : `Lost ${jackpot} dabloons❗ total dabloons: ${updatedUser.moneyAmount} <a:BLUBBERS:855166052492771378>`
         } \n${coinflipHistory.getHistory()}`,
       };
     } catch (error) {

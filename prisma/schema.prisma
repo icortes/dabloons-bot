@@ -8,10 +8,10 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-  currency  Int
-  user_id   String   @unique
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime @default(now())
+  moneyAmount Int      @map("currency")
+  user_id     String   @unique
 
   @@map("users")
 }

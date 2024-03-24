@@ -31,6 +31,7 @@ client.once(Events.ClientReady, (readyClient) => {
   new WOK({
     client,
     commandsDir: path.join(__dirname, 'commands'),
+    featuresDir: path.join(__dirname, 'features'),
     botOwners: ['95377567707566080'],
     testServers: ['289669662612914176', '1215498228271677540'],
     mongoUri: process.env.DATABASE_URL,
@@ -44,5 +45,6 @@ client.once(Events.ClientReady, (readyClient) => {
 
 client.login(process.env.TOKEN);
 
-
+//TODO: leaderboards
 //TODO: https://discord.js.org/docs/packages/discord.js/14.14.1/GuildMember:Class#disableCommunicationUntil
+//TODO: alexa feature with image search
