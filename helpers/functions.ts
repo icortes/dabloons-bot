@@ -1,3 +1,5 @@
+import { User } from '@prisma/client';
+
 /**
  * Returns the file name without the extension from the given file path.
  * @param filePath - The file path including the file name and extension.
@@ -20,4 +22,19 @@ export function getCoinEmojis(coins: number): string {
     coinString += '🪙';
   }
   return coinString;
+}
+
+/**
+ * Returns a formatted string of the top ten users.
+ * @param userArray - The array of users.
+ * @returns A formatted string of the top ten users.
+ */
+export function topTenMessageFormatter(userArray: User[]): string {
+  let formattedString: string = '```\n';
+  userArray.forEach((user, index) => {
+    formattedString += `${((index + 1).toString() + '.').padEnd(3)} ${(
+      user.name ?? 'unknown'
+    ).padEnd(12)} ${user.moneyAmount.toString().padStart(4)} 🪙\n`;
+  });
+  return formattedString + '```';
 }
