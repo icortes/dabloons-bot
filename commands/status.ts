@@ -13,7 +13,7 @@ export default {
     console.info(`[COMMAND] /${getFileNameWithoutExtension(__filename)} loaded!`);
   },
   // Required for slash commands
-  description: 'Ping pong command',
+  description: 'Change the bot status.',
 
   // Create a legacy and slash command
   type: CommandType.SLASH,
