@@ -1,6 +1,7 @@
 import { ActivityType, Client, Events, IntentsBitField, Partials } from 'discord.js';
 import WOK from 'wokcommands';
 import path from 'path';
+import { StatusSetter } from './helpers/StatusSetter';
 require('dotenv/config');
 
 const client = new Client({
@@ -17,16 +18,8 @@ const client = new Client({
 client.once(Events.ClientReady, (readyClient) => {
   console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 
-  client.user?.setPresence({
-    status: 'online',
-    activities: [
-      {
-        name: 'Valorante 🔫',
-        type: ActivityType.Playing,
-        state: '*★,°*:.☆(￣▽￣) / $:*.°★* 。',
-      },
-    ],
-  });
+  const statusSetter: StatusSetter = StatusSetter.getInstance();
+  statusSetter.setBotStatus(client);
 
   new WOK({
     client,

@@ -5,6 +5,7 @@ import {
 } from 'discord.js';
 import { Command, CommandObject, CommandType, CommandUsage } from 'wokcommands';
 import { getFileNameWithoutExtension } from '../helpers/functions';
+import { StatusSetter } from '../helpers/StatusSetter';
 
 export default {
   // init command is ran when the bot is first started
@@ -66,7 +67,8 @@ export default {
       case 'type':
         return [
           ...Object.keys(ActivityType).filter(
-            (key): boolean => typeof ActivityType[key as any] === 'number'
+            (key: string): boolean =>
+              typeof ActivityType[key as keyof typeof ActivityType] === 'number'
           ),
         ];
       case 'state':
@@ -83,9 +85,22 @@ export default {
 
   // Invoked when a user runs the ping command
   callback: (options: CommandUsage) => {
-    // TODO: make
+    const statusSetter: StatusSetter = StatusSetter.getInstance();
+    const [name, type, state] = options.args as [
+      name: string,
+      type: ActivityType,
+      state: string
+    ];
+    statusSetter.setStatusProps({
+      name,
+      type: type,
+      state,
+    });
+    statusSetter.setBotStatus(options.client);
+
     return {
-      content: 'Pong!',
+      content: 'Status set!',
+      ephemeral: true,
     };
   },
 } as CommandObject;
